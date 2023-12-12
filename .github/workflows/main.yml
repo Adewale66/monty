@@ -17,7 +17,7 @@ jobs:
                   chmod +x install.sh
                   ./install.sh
                   cd ..
-                  betty *
+                  betty *c *.h
             - name: Check if C files complie
               run: |
                   echo install gcc
