@@ -85,7 +85,7 @@ void pstr(stack_t **head, unsigned int line_number)
 }
 
 /**
- * rot1 - rotates the stack to the top.
+ * rotl - rotates the stack to the top.
  * @head: pointer to the head of the stack
  * @line_number: line number of the opcode
  * Return: void
@@ -94,6 +94,7 @@ void pstr(stack_t **head, unsigned int line_number)
 void rotl(stack_t **head, unsigned int line_number)
 {
 	stack_t *current = *head;
+	stack_t *temp = (*head)->next;
 
 	(void)line_number;
 	if (current == NULL || current->next == NULL)
@@ -102,8 +103,8 @@ void rotl(stack_t **head, unsigned int line_number)
 		current = current->next;
 	current->next = *head;
 	(*head)->prev = current;
-	*head = (*head)->next;
-	(*head)->prev->next = NULL;
+	(*head)->next = NULL;
+	*head = temp;
 	(*head)->prev = NULL;
 	new_node_n = 0;
 }
