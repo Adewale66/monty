@@ -50,12 +50,15 @@ typedef struct instruction_s
 /* global variable */
 EXTERN int new_node_n INIT(-1);
 
+/* Stack & Queue operations */
+void push(stack_t **head, unsigned int line_number);
+void pall(stack_t **head, unsigned int line_number);
+void pint(stack_t **head, unsigned int line_number);
+
 /* Function Prototypes */
 void parse(FILE *file);
 char **tokenize(char *line);
 void get_opcode(stack_t **head, unsigned int line_num, char *line, FILE *file);
-void push(stack_t **head, unsigned int line_number);
-void pall(stack_t **head, unsigned int line_number);
 int check_number(char *number);
 void free_stack(stack_t **head);
 int execute(char **, stack_t **, unsigned int, char *, FILE *);
