@@ -57,5 +57,6 @@ void pall(stack_t **head, unsigned int line_number);
 int check_number(char *number);
 void free_stack(stack_t **head);
 int execute(char **, stack_t **, unsigned int, char *, FILE *);
+int line_empty(char *line);
 
 #endif /* __MONTY__ */

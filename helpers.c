@@ -68,3 +68,22 @@ char **tokenize(char *line)
 	tokens[i] = NULL;
 	return (tokens);
 }
+
+/**
+ * line_empty - checks if a line is empty
+ * @line: line to check
+ * Return: 1 if empty, 0 if not
+ */
+
+int line_empty(char *line)
+{
+	int i = 0;
+
+	while (line[i] != '\0' && line[i] != '\n')
+	{
+		if (line[i] != ' ' && line[i] != '\n' && line[i] != '\t')
+			return (0);
+		i++;
+	}
+	return (1);
+}
