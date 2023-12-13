@@ -38,8 +38,9 @@ void get_opcode(stack_t **head, unsigned int line_num, char *line, FILE *file)
 {
 
 	int res = 0;
-	char **tokens = tokenize(line);
+	char **tokens = NULL;
 
+	tokens = tokenize(line);
 	if (tokens == NULL)
 	{
 		free_stack(head);
