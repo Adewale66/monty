@@ -52,5 +52,6 @@ void pall(stack_t **head, unsigned int line_number)
 		printf("%d\n", current->n);
 		current = current->next;
 	}
+	fflush(stdout);
 	new_node_n = 0;
 }

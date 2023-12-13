@@ -63,6 +63,8 @@ char **tokenize(char *line)
 	{
 		tokens[i] = token;
 		token = strtok(NULL, " \n\t");
+		if (i == 2)
+			break;
 		i++;
 	}
 	tokens[i] = NULL;
