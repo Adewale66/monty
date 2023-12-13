@@ -45,7 +45,7 @@ void get_opcode(stack_t **head, unsigned int line_num, char *line, FILE *file)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	res = execute(tokens, head, line_num, line);
+	res = execute(tokens, head, line_num, line, file);
 	if (res == 0)
 		return;
 
@@ -66,7 +66,7 @@ void get_opcode(stack_t **head, unsigned int line_num, char *line, FILE *file)
  * Return: 0 on success, 1 on failure
  */
 
-int execute(char **tokens, stack_t **head, unsigned int line_num, char *line)
+int execute(char **ts, stack_t **head, unsigned int ln, char *line, FILE *file)
 {
 	int i = 0;
 	instruction_t opcodes[] = {
@@ -76,20 +76,21 @@ int execute(char **tokens, stack_t **head, unsigned int line_num, char *line)
 
 	while (opcodes[i].opcode != NULL)
 	{
-		if (strcmp(tokens[0], opcodes[i].opcode) == 0)
+		if (strcmp(ts[0], opcodes[i].opcode) == 0)
 		{
-			if (tokens[1] && check_number(tokens[1]) == 0)
-				new_node_n = atoi(tokens[1]);
+			if (ts[1] && check_number(ts[1]) == 0)
+				new_node_n = atoi(ts[1]);
 			else
 				new_node_n = -1;
-			opcodes[i].f(head, line_num);
+			opcodes[i].f(head, ln);
 			if (new_node_n == -1)
 			{
-				free(tokens);
+				free(ts);
 				free(line);
+				fclose(file);
 				exit(EXIT_FAILURE);
 			}
-			free(tokens);
+			free(ts);
 			return (0);
 		}
 		i++;
