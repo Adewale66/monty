@@ -84,7 +84,11 @@ int line_empty(char *line)
 	while (line[i] != '\0' && line[i] != '\n')
 	{
 		if (line[i] != ' ' && line[i] != '\n' && line[i] != '\t')
+		{
+			if (line[i] == '#')
+				return (1);
 			return (0);
+		}
 		i++;
 	}
 	return (1);
