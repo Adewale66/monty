@@ -101,3 +101,27 @@ void pop(stack_t **head, unsigned int line_number)
 	free(current);
 	new_node_n = 0;
 }
+
+/**
+ * swap - swaps the top two elements of the stack
+ * @head: pointer to the head of the stack
+ * @line_number: line number of the opcode
+ * Return: void
+ */
+void swap(stack_t **head, unsigned int line_number)
+{
+	stack_t *current = *head;
+	int temp;
+
+	if (current == NULL || current->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		free_stack(head);
+		new_node_n = INVALID_OPCODE;
+		return;
+	}
+	temp = current->n;
+	current->n = current->next->n;
+	current->next->n = temp;
+	new_node_n = 0;
+}
