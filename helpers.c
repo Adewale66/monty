@@ -3,23 +3,23 @@
 /**
  * check_number - checks if a string is a number
  * @number: string to check
- * Return: 0 if number, 1 if not
+ * Return: number or INVALID_OPCODE if not a number
  */
 int check_number(char *number)
 {
 	int i = 0;
 
 	if (number == NULL)
-		return (1);
+		return (INVALID_OPCODE);
 	if (number[0] == '-')
 		i = 1;
 	while (number[i] != '\0')
 	{
 		if (!(number[i] >= '0' && number[i] <= '9'))
-			return (1);
+			return (INVALID_OPCODE);
 		i++;
 	}
-	return (0);
+	return (atoi(number));
 }
 
 /**
