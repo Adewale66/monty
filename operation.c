@@ -55,3 +55,26 @@ void pall(stack_t **head, unsigned int line_number)
 	fflush(stdout);
 	new_node_n = 0;
 }
+
+/**
+ * pint - prints the value at the top of the stack
+ * @head: pointer to the head of the stack
+ * @line_number: line number of the opcode
+ * Return: void
+ */
+
+void pint(stack_t **head, unsigned int line_number)
+{
+	stack_t *current = *head;
+
+	if (current == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free_stack(head);
+		new_node_n = INVALID_OPCODE;
+		return;
+	}
+	printf("%d\n", current->n);
+	fflush(stdout);
+	new_node_n = 0;
+}
