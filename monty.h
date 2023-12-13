@@ -56,6 +56,6 @@ void push(stack_t **head, unsigned int line_number);
 void pall(stack_t **head, unsigned int line_number);
 int check_number(char *number);
 void free_stack(stack_t **head);
-int execute(char **tokens, stack_t **head, unsigned int line_num, char *line);
+int execute(char **, stack_t **, unsigned int, char *, FILE *);
 
 #endif /* __MONTY__ */
