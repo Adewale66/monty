@@ -62,7 +62,6 @@ void pall(stack_t **head, unsigned int line_number)
  * @line_number: line number of the opcode
  * Return: void
  */
-
 void pint(stack_t **head, unsigned int line_number)
 {
 	stack_t *current = *head;
@@ -76,5 +75,29 @@ void pint(stack_t **head, unsigned int line_number)
 	}
 	printf("%d\n", current->n);
 	fflush(stdout);
+	new_node_n = 0;
+}
+
+/**
+ * pop - removes the top element of the stack
+ * @head: pointer to the head of the stack
+ * @line_number: line number of the opcode
+ * Return: void
+ */
+void pop(stack_t **head, unsigned int line_number)
+{
+	stack_t *current = *head;
+
+	if (current == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		free_stack(head);
+		new_node_n = INVALID_OPCODE;
+		return;
+	}
+	*head = current->next;
+	if (current->next != NULL)
+		current->next->prev = NULL;
+	free(current);
 	new_node_n = 0;
 }

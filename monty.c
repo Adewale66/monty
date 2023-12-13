@@ -77,6 +77,7 @@ int execute(char **ts, stack_t **head, unsigned int ln, char *line, FILE *file)
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"pop", pop},
 		{NULL, NULL}};
 
 	while (opcodes[i].opcode != NULL)
