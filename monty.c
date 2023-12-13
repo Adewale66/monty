@@ -84,9 +84,9 @@ int execute(char **ts, stack_t **head, unsigned int ln, char *line, FILE *file)
 			if (ts[1] && check_number(ts[1]) == 0)
 				new_node_n = atoi(ts[1]);
 			else
-				new_node_n = -1;
+				new_node_n = INVALID_OPCODE;
 			opcodes[i].f(head, ln);
-			if (new_node_n == -1)
+			if (new_node_n == INVALID_OPCODE)
 			{
 				free(ts);
 				free(line);

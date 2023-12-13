@@ -45,6 +45,8 @@ typedef struct instruction_s
 #define INIT(A)
 #endif
 
+#define INVALID_OPCODE -1000
+
 /* global variable */
 EXTERN int new_node_n INIT(-1);
 

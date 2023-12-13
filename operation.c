@@ -17,10 +17,10 @@ void push(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free_stack(head);
-		new_node_n = -1;
+		new_node_n = INVALID_OPCODE;
 		return;
 	}
-	if (new_node_n == -1)
+	if (new_node_n == INVALID_OPCODE)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free(new_node);

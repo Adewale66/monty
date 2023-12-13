@@ -15,11 +15,11 @@ int check_number(char *number)
 		i = 1;
 	while (number[i] != '\0')
 	{
-		if (isdigit(number[i]) != 0)
-			return (0);
+		if (!(number[i] >= '0' && number[i] <= '9'))
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 /**
