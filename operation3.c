@@ -93,20 +93,24 @@ void pstr(stack_t **head, unsigned int line_number)
 
 void rotl(stack_t **head, unsigned int line_number)
 {
-	stack_t *current = *head;
-	stack_t *temp = (*head)->next;
+
+	stack_t *curr = NULL;
+	stack_t *temp = NULL;
 
 	(void)line_number;
-	if (current == NULL || current->next == NULL)
+	if (*head == NULL || (*head)->next == NULL)
 		return;
-	while (current->next != NULL)
-		current = current->next;
-	current->next = *head;
-	(*head)->prev = current;
+
+	curr = *head;
+	temp = (*head)->next;
+
+	while (curr->next != NULL)
+		curr = curr->next;
+	temp->prev = NULL;
+	curr->next = *head;
+	(*head)->prev = curr;
 	(*head)->next = NULL;
 	*head = temp;
-	(*head)->prev = NULL;
-	new_node_n = 0;
 }
 
 /**
@@ -118,17 +122,19 @@ void rotl(stack_t **head, unsigned int line_number)
 
 void rotr(stack_t **head, unsigned int line_number)
 {
-	stack_t *current = *head;
+	stack_t *current = NULL;
 
 	(void)line_number;
 	if (current == NULL || current->next == NULL)
 		return;
+
+	current = *head;
 	while (current->next != NULL)
 		current = current->next;
+	current->prev->next = NULL;
+	current->prev = NULL;
 	current->next = *head;
 	(*head)->prev = current;
 	*head = current;
-	(*head)->prev->next = NULL;
-	(*head)->prev = NULL;
 	new_node_n = 0;
 }
