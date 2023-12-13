@@ -87,7 +87,7 @@ int execute(char **ts, stack_t **head, unsigned int ln, char *line, FILE *file)
 		{"mod", mod},
 		{"pchar", pchar},
 		{"pstr", pstr},
-		{"rot1", rot1},
+		{"rotl", rotl},
 		{"rotr", rotr},
 		{NULL, NULL}};
 

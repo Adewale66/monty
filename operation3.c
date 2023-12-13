@@ -91,17 +91,20 @@ void pstr(stack_t **head, unsigned int line_number)
  * Return: void
  */
 
-void rot1(stack_t **head, unsigned int line_number)
+void rotl(stack_t **head, unsigned int line_number)
 {
 	stack_t *current = *head;
-	int tmp;
 
 	(void)line_number;
 	if (current == NULL || current->next == NULL)
 		return;
-	tmp = current->n;
-	current->n = current->next->n;
-	current->next->n = tmp;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = *head;
+	(*head)->prev = current;
+	*head = (*head)->next;
+	(*head)->prev->next = NULL;
+	(*head)->prev = NULL;
 	new_node_n = 0;
 }
 
@@ -115,15 +118,16 @@ void rot1(stack_t **head, unsigned int line_number)
 void rotr(stack_t **head, unsigned int line_number)
 {
 	stack_t *current = *head;
-	int tmp;
 
 	(void)line_number;
 	if (current == NULL || current->next == NULL)
 		return;
 	while (current->next != NULL)
 		current = current->next;
-	tmp = current->n;
-	current->n = current->prev->n;
-	current->prev->n = tmp;
+	current->next = *head;
+	(*head)->prev = current;
+	*head = current;
+	(*head)->prev->next = NULL;
+	(*head)->prev = NULL;
 	new_node_n = 0;
 }
