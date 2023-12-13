@@ -18,6 +18,8 @@ void parse(FILE *file)
 		line_number++;
 		if (line[0] == '\n')
 			continue;
+		if (line_empty(line) == 1)
+			continue;
 		get_opcode(&head, line_number, line, file);
 	}
 	free(line);
@@ -59,10 +61,11 @@ void get_opcode(stack_t **head, unsigned int line_num, char *line, FILE *file)
 
 /**
  * execute - executes the opcode
- * @tokens: array of tokens
+ * @ts: array of tokens
  * @head: head of the stack
- * @line_num: line number
+ * @ln: line number
  * @line: parsed line
+ * @file: file to close
  * Return: 0 on success, 1 on failure
  */
 
