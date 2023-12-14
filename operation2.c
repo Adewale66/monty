@@ -14,14 +14,14 @@ void add(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	current->next->n += current->n;
 	*head = current->next;
 	current->next->prev = NULL;
 	free(current);
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -34,7 +34,7 @@ void nop(stack_t **head, unsigned int line_number)
 {
 	(void)head;
 	(void)line_number;
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -51,14 +51,14 @@ void sub(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	current->next->n -= current->n;
 	*head = current->next;
 	current->next->prev = NULL;
 	free(current);
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -76,21 +76,21 @@ void divide(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	if (current->n == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	current->next->n /= current->n;
 	*head = current->next;
 	current->next->prev = NULL;
 	free(current);
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -108,12 +108,12 @@ void mul(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	current->next->n *= current->n;
 	*head = current->next;
 	current->next->prev = NULL;
 	free(current);
-	new_node_n = 0;
+	global.n = 0;
 }

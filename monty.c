@@ -1,6 +1,8 @@
 #define DEFINE_GLOBAL
 #include "monty.h"
 
+global_t global = {0, 0};
+
 /**
  * parse - parses a file for monty opcodes
  * @file: file to parse
@@ -89,15 +91,16 @@ int execute(char **ts, stack_t **head, unsigned int ln, char *line, FILE *file)
 		{"pstr", pstr},
 		{"rotl", rotl},
 		{"rotr", rotr},
+		{"queue", queue},
+		{"stack", stack},
 		{NULL, NULL}};
-
 	while (opcodes[i].opcode != NULL)
 	{
 		if (strcmp(ts[0], opcodes[i].opcode) == 0)
 		{
-			new_node_n = check_number(ts[1]);
+			global.n = check_number(ts[1]);
 			opcodes[i].f(head, ln);
-			if (new_node_n == INVALID_OPCODE)
+			if (global.n == INVALID_OPCODE)
 			{
 				free(ts);
 				free(line);

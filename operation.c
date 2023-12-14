@@ -9,30 +9,10 @@
 
 void push(stack_t **head, unsigned int line_number)
 {
-	stack_t *new_node = NULL;
-
-	(void)line_number;
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		free_stack(head);
-		new_node_n = INVALID_OPCODE;
-		return;
-	}
-	if (new_node_n == INVALID_OPCODE)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		free(new_node);
-		free_stack(head);
-		return;
-	}
-	new_node->n = new_node_n;
-	new_node->prev = NULL;
-	new_node->next = *head;
-	if (*head != NULL)
-		(*head)->prev = new_node;
-	*head = new_node;
+	if (global.type == 0)
+		push_stack(head, line_number);
+	else
+		push_queue(head, line_number);
 }
 
 /**
@@ -53,7 +33,7 @@ void pall(stack_t **head, unsigned int line_number)
 		current = current->next;
 	}
 	fflush(stdout);
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -70,12 +50,12 @@ void pint(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	printf("%d\n", current->n);
 	fflush(stdout);
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -92,14 +72,14 @@ void pop(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	*head = current->next;
 	if (current->next != NULL)
 		current->next->prev = NULL;
 	free(current);
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -117,11 +97,11 @@ void swap(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	temp = current->n;
 	current->n = current->next->n;
 	current->next->n = temp;
-	new_node_n = 0;
+	global.n = 0;
 }

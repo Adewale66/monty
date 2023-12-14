@@ -37,18 +37,14 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-#ifdef DEFINE_GLOBAL
-#define EXTERN
-#define INIT(A) = (A)
-#else
-#define EXTERN extern
-#define INIT(A)
-#endif
+typedef struct global_s
+{
+	int n;
+	int type;
+} global_t;
 
 #define INVALID_OPCODE -1000
-
-/* global variable */
-EXTERN int new_node_n INIT(-1);
+extern global_t global;
 
 /* Stack & Queue operations */
 void push(stack_t **head, unsigned int line_number);
@@ -66,6 +62,10 @@ void pchar(stack_t **head, unsigned int line_number);
 void pstr(stack_t **head, unsigned int line_number);
 void rotl(stack_t **head, unsigned int line_number);
 void rotr(stack_t **head, unsigned int line_number);
+void queue(stack_t **head, unsigned int line_number);
+void stack(stack_t **head, unsigned int line_number);
+void push_stack(stack_t **head, unsigned int line_number);
+void push_queue(stack_t **head, unsigned int line_number);
 
 /* Function Prototypes */
 void parse(FILE *file);

@@ -16,21 +16,21 @@ void mod(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	if (current->n == 0)
 	{
 		fprintf(stderr, "L%d: division by zero\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	current->next->n %= current->n;
 	*head = current->next;
 	current->next->prev = NULL;
 	free(current);
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -48,18 +48,18 @@ void pchar(stack_t **head, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	if (current->n < 0 || current->n > 127)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 		free_stack(head);
-		new_node_n = INVALID_OPCODE;
+		global.n = INVALID_OPCODE;
 		return;
 	}
 	printf("%c\n", current->n);
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -81,7 +81,7 @@ void pstr(stack_t **head, unsigned int line_number)
 		c = c->next;
 	}
 	printf("\n");
-	new_node_n = 0;
+	global.n = 0;
 }
 
 /**
@@ -96,7 +96,7 @@ void rotl(stack_t **head, unsigned int line_number)
 	stack_t *current = *head;
 	int temp = 0;
 
-	new_node_n = 0;
+	global.n = 0;
 	(void)line_number;
 	if (current == NULL || current->next == NULL)
 		return;
@@ -123,7 +123,7 @@ void rotr(stack_t **head, unsigned int line_number)
 	stack_t *current = *head;
 
 	(void)line_number;
-	new_node_n = 0;
+	global.n = 0;
 	if (current == NULL || current->next == NULL)
 		return;
 	while (current->next != NULL)
