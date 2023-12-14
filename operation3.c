@@ -96,6 +96,7 @@ void rotl(stack_t **head, unsigned int line_number)
 	stack_t *current = *head;
 	int temp = 0;
 
+	new_node_n = 0;
 	(void)line_number;
 	if (current == NULL || current->next == NULL)
 		return;
@@ -103,11 +104,11 @@ void rotl(stack_t **head, unsigned int line_number)
 	while (current->next != NULL)
 	{
 		int temp2 = current->next->n;
+
 		current->n = temp2;
 		current = current->next;
 		current->n = temp;
 	}
-	new_node_n = 0;
 }
 
 /**
@@ -122,6 +123,7 @@ void rotr(stack_t **head, unsigned int line_number)
 	stack_t *current = *head;
 
 	(void)line_number;
+	new_node_n = 0;
 	if (current == NULL || current->next == NULL)
 		return;
 	while (current->next != NULL)
@@ -131,5 +133,4 @@ void rotr(stack_t **head, unsigned int line_number)
 	*head = current;
 	(*head)->prev->next = NULL;
 	(*head)->prev = NULL;
-	new_node_n = 0;
 }
